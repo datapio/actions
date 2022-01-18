@@ -1,0 +1,10 @@
+---
+name: datapio-klander
+description: Reconcile Kubernetes cluster
+inputs:
+  kubeconfig:
+    description: Base64 encoded Kubernetes configuration file
+    required: true
+runs:
+  using: docker
+  image: Dockerfile
