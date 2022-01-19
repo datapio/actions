@@ -1,0 +1,13 @@
+---
+name: datapio-klifter
+description: Deploy to Kubernetes cluster
+inputs:
+  path:
+    description: Path to klifter project
+    required: true
+  kubeconfig:
+    description: Base64 encoded Kubernetes configuration file
+    required: true
+runs:
+  using: docker
+  image: Dockerfile
