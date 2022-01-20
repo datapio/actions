@@ -24,5 +24,15 @@ jobs:
         with:
           path: "${{ env.GITHUB_WORKSPACE }}/tests"
 
+      - name: test@klifter
+        run: |
+          kubectl get serviceaccounts foo
+          kubectl get serviceaccounts bar
+
       - name: run@klander
         uses: ./klander
+
+      - name: test@klander
+        run: |
+          kubectl get serviceaccounts foo
+          ! kubectl get serviceaccounts bar
