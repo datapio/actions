@@ -1,0 +1,28 @@
+---
+name: test
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout@scm
+        uses: actions/checkout@main
+
+      - name: setup@kubernetes
+        uses: engineerd/setup-kind@v0.5.0
+
+      - name: run@klifter
+        uses: ./klifter
+        with:
+          path: "${{ env.GITHUB_WORKSPACE }}/tests"
+
+      - name: run@klander
+        uses: ./klander
