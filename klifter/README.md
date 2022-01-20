@@ -9,15 +9,12 @@ cluster.
 
 **Required.** Path to *klifter* project.
 
-### `kubeconfig`
-
-**Required.** Base64 encoded Kubernetes configuration file.
-
 ## Example usage
 
 ```yaml
 uses: datapio/actions/klifter@main
 with:
   path: "${{ env.GITHUB_WORKSPACE }}/.klifter"
-  kubeconfig: ${{ secrets.KUBECONFIG }}
+env:
+  KUBECONFIG: /path/to/.kube/config  # defaults to $HOME/.kube/config
 ```
