@@ -18,21 +18,30 @@ jobs:
 
       - name: setup@kubernetes
         uses: engineerd/setup-kind@v0.5.0
+        with:
+          kubeconfig: kubeconfig.yml
 
       - name: run@klifter
         uses: ./klifter
         with:
           path: tests
+          kubeconfig: kubeconfig.yml
 
       - name: test@klifter
         run: |
           kubectl get serviceaccounts foo
           kubectl get serviceaccounts bar
+        env:
+          KUBECONFIG: "${{ github.workspace }}/kubeconfig.yml"
 
       - name: run@klander
         uses: ./klander
+        with:
+          kubeconfig: kubeconfig.yml
 
       - name: test@klander
         run: |
           kubectl get serviceaccounts foo
           ! kubectl get serviceaccounts bar
+        env:
+          KUBECONFIG: "${{ github.workspace }}/kubeconfig.yml"
