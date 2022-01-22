@@ -23,7 +23,7 @@ case "$2" in
     ;;
 
   *)
-    export KUBECONFIG="/github/workspace/$KUBECONFIG"
+    export KUBECONFIG="/github/workspace/$2"
     ;;
 esac
 

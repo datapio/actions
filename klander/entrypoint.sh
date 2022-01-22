@@ -9,7 +9,7 @@ case "$1" in
     ;;
 
   *)
-    export KUBECONFIG="/github/workspace/$KUBECONFIG"
+    export KUBECONFIG="/github/workspace/$1"
     ;;
 esac
 
