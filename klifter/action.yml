@@ -5,8 +5,12 @@ inputs:
   path:
     description: Path to klifter project
     required: true
+  kubeconfig:
+    description: Path to Kubernetes configuration
+    required: true
 runs:
   using: docker
   image: Dockerfile
   args:
     - ${{ inputs.path }}
+    - ${{ inputs.kubeconfig }}

@@ -7,7 +7,7 @@ export K8S_STATE_SOURCE_KIND="local"
 
 case "$1" in
   /*)
-    echo "::error::Path should be relative and not absolute"
+    echo "::error::Input 'path' should be relative and not absolute"
     exit 1
     ;;
 
@@ -16,14 +16,10 @@ case "$1" in
     ;;
 esac
 
-case "$KUBECONFIG" in
+case "$2" in
   /*)
-    echo "::error::KUBECONFIG environment variable should be relative and not absolute"
+    echo "::error::Input 'kubeconfig' should be relative and not absolute"
     exit 1
-    ;;
-
-  "")
-    export KUBECONFIG="/github/home/.kube/config"
     ;;
 
   *)

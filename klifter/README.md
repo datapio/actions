@@ -7,7 +7,11 @@ cluster.
 
 ### `path`
 
-**Required.** Path to *klifter* project.
+**Required.** Path to *klifter* project, relative to current workspace.
+
+### `kubeconfig`
+
+**Required.** Path to Kubernetes configuration file, relative to current workspace.
 
 ## Example usage
 
@@ -15,6 +19,5 @@ cluster.
 uses: datapio/actions/klifter@main
 with:
   path: "${{ env.GITHUB_WORKSPACE }}/.klifter"
-env:
-  KUBECONFIG: /path/to/.kube/config  # defaults to $HOME/.kube/config
+  kubeconfig: path/to/kubeconfig.yml
 ```
