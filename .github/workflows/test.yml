@@ -16,8 +16,17 @@ jobs:
       - name: checkout@scm
         uses: actions/checkout@main
 
+      - name: setup@kindconfig
+        run: |
+          kind_in="${{ github.workspace }}/.github/config/kind.yml.in"
+          kind_out="${{ github.workspace }}/.github/config/kind.yml"
+          hostip=$(sh .github/scripts/get-host-ip.sh)
+          sed "s/127.0.0.1/$hostip/g" $kind_in > $kind_out
+
       - name: setup@kubernetes
         uses: engineerd/setup-kind@v0.5.0
+        with:
+          config: .github/config/kind.yml
 
       - name: setup@kubeconfig
         run: |
