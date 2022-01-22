@@ -11,12 +11,12 @@ RUN set -ex && \
     && \
     rm -rf /var/lib/apt/lists/*
 
-RUN set -ex && \
-    pip install poetry && \
-    poetry config virtualenvs.in-project true
+RUN pip install poetry
 
 COPY --from=ghcr.io/datapio/klifter:0.2.0 /workspace /workspace
 WORKDIR /workspace
+
+RUN poetry config virtualenvs.in-project true --local
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
