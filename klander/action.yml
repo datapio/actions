@@ -1,6 +1,12 @@
 ---
 name: datapio-klander
 description: Reconcile Kubernetes cluster
+inputs:
+  kubeconfig:
+    description: Path to Kubernetes configuration
+    required: true
 runs:
   using: docker
   image: Dockerfile
+  args:
+    - ${{ inputs.kubeconfig }}
