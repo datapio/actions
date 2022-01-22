@@ -22,7 +22,7 @@ jobs:
       - name: run@klifter
         uses: ./klifter
         with:
-          path: "${{ env.GITHUB_WORKSPACE }}/tests"
+          path: "${{ github.workspace }}/tests"
 
       - name: test@klifter
         run: |
