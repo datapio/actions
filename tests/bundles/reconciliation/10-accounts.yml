@@ -9,11 +9,11 @@ spec:
     kind: ServiceAccount
     namespaces: '*'
   match:
-    - description: Only those ServiceAccounts are allowed
-      field: metadata.name
-      where: ['$in', [
-        'default',
-        'foo'
-      ]]
+    description: Only those ServiceAccounts are allowed
+    field: metadata.name
+    where: ['$in', [
+      'default',
+      'foo'
+    ]]
   reconcile:
     deleteExtras: yes
