@@ -1,11 +1,25 @@
-FROM ghcr.io/datapio/klifter:0.2.0
+FROM python:3.9-slim-buster
 
-USER root
+RUN set -ex && \
+    apt update && \
+    apt install --no-install-recommends -y \
+        apt-transport-https \
+        ca-certificates \
+        curl gnupg \
+        lsb-release \
+        sudo \
+    && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN set -ex && \
+    pip install poetry && \
+    poetry config virtualenvs.in-project true
+
+COPY --from=ghcr.io/datapio/klifter:0.2.0 /workspace /workspace
+WORKDIR /workspace
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
-
-USER klifter-agent
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD [""]
