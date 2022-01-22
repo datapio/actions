@@ -16,7 +16,9 @@ RUN pip install poetry
 COPY --from=ghcr.io/datapio/klifter:0.2.0 /workspace /workspace
 WORKDIR /workspace
 
-RUN poetry config virtualenvs.in-project true --local
+RUN set -ex && \
+    poetry config virtualenvs.in-project true --local && \
+    poetry install
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
