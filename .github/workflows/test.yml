@@ -18,8 +18,11 @@ jobs:
 
       - name: setup@kubernetes
         uses: engineerd/setup-kind@v0.5.0
-        with:
-          kubeconfig: kubeconfig.yml
+
+      - name: setup@kubeconfig
+        run: |
+          hostip=$(sh .github/scripts/get-host-ip.sh)
+          sed "s/127.0.0.1/$hostip/g" $HOME/.kube/config > ${{ github.workspace }}/kubeconfig.yml
 
       - name: run@klifter
         uses: ./klifter
@@ -31,8 +34,6 @@ jobs:
         run: |
           kubectl get serviceaccounts foo
           kubectl get serviceaccounts bar
-        env:
-          KUBECONFIG: "${{ github.workspace }}/kubeconfig.yml"
 
       - name: run@klander
         uses: ./klander
@@ -43,5 +44,3 @@ jobs:
         run: |
           kubectl get serviceaccounts foo
           ! kubectl get serviceaccounts bar
-        env:
-          KUBECONFIG: "${{ github.workspace }}/kubeconfig.yml"
