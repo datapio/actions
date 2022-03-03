@@ -5,7 +5,5 @@ USER root
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-USER klander
-
 ENTRYPOINT ["/entrypoint.sh"]
 CMD [""]
